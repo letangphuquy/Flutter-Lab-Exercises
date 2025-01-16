@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'I Am Rich',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -48,6 +48,16 @@ class MyHomePage extends StatelessWidget {
         appBar: AppBar(
           title: const Text("I am Rich!"),
           centerTitle: true,
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [
+            Image(
+              image: AssetImage("images/diamond.jpg"),
+              width: 250,  
+            )
+          ],
         ),
       ),
     );
