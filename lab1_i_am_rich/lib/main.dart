@@ -40,27 +40,25 @@ class MyHomePage extends StatelessWidget {
   // always marked "final".
 
   final String title;
-  
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Color.fromARGB(255, 123, 134, 130),
         appBar: AppBar(
           title: const Text("I am Rich!"),
           centerTitle: true,
+          backgroundColor: Color.fromARGB(255, 30, 92, 129),
+          foregroundColor: Colors.white,
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            Image(
-              image: AssetImage("images/diamond.jpg"),
-              width: 250,  
-            )
-          ],
+        body: Center(
+          child: Image(
+            image: AssetImage("images/diamond.jpg"),
+            width: 400,
+          ),
         ),
       ),
     );
   }
-  
 }
