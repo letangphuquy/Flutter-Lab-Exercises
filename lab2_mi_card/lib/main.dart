@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Lab 2',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
@@ -32,14 +33,16 @@ class MyHomePage extends StatelessWidget {
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
+  static const Color myGreen = Color.fromARGB(255, 77, 131, 239);
+  static const TextStyle cardTextStyle = TextStyle(fontSize: 14);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 21, 111, 78),
+        backgroundColor: myGreen,
         appBar: AppBar(
-          title: const Text("My Card - basic portfolio"),
+          title: const Text("MiCard - my toy portfolio"),
           centerTitle: true,
           backgroundColor: Colors.green,
           foregroundColor: Colors.white,
@@ -53,23 +56,37 @@ class MyHomePage extends StatelessWidget {
                 backgroundImage: AssetImage("images/pq.jfif"),
               ),
               Text(
-                "My Name",
+                "Lê Tăng Phú Quý",
                 style: TextStyle(
                   fontFamily: 'Nunito',
                   fontSize: 36,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text("JobTitle", style: TextStyle(fontFamily: 'Arial')),
+              Text("Competitive Programmer",
+                  style: TextStyle(
+                    fontFamily: 'Arial',
+                    fontSize: 24,
+                  )),
               SizedBox(
                 height: 20,
               ),
               Card(
-                child: ListTile(title: Text("Card 1")),
+                child: ListTile(
+                    leading: Icon(Icons.phone),
+                    title: Text("(+84) 941 640 105", style: cardTextStyle)),
               ),
               Card(
-                child: ListTile(title: Text("Card 2")),
-              )
+                child: ListTile(
+                    leading: Icon(Icons.email),
+                    title:
+                        Text("quyltp.22git@vku.udn.vn", style: cardTextStyle)),
+              ),
+              Card(
+                child: ListTile(
+                    leading: Icon(Icons.school),
+                    title: Text("Vietnam - Korea University of ICT", style: cardTextStyle)),
+              ),
             ],
           ),
         ),
