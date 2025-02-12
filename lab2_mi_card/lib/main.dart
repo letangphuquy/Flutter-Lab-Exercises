@@ -39,33 +39,19 @@ class MyHomePage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Color.fromARGB(255, 123, 134, 130),
         appBar: AppBar(
-          title: const Text("I am Rich!",
-            style: TextStyle(
-              fontFamily: 'Nunito',
-                fontSize: 36,
-                // fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 2.0,
-                wordSpacing: 5.0,
-                shadows: [
-                Shadow(
-                  offset: Offset(2.0, 2.0),
-                  blurRadius: 3.0,
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
-                ],
-            ),
-          ),
+          title: const Text("My Card - basic portfolio"),
           centerTitle: true,
-          backgroundColor: Color.fromARGB(255, 30, 92, 129),
+          backgroundColor: Colors.green,
           foregroundColor: Colors.white,
-          toolbarHeight: 100,
         ),
         body: Center(
           child: Column(
             children: [
               CircleAvatar(
-                backgroundColor: Colors.orange,
+                radius: 50,
+                backgroundImage: AssetImage(
+                  "images/pq.jfif"
+                ),
               )
             ],
           ),
