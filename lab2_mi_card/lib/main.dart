@@ -35,9 +35,9 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        return SafeArea(
+    return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 123, 134, 130),
+        backgroundColor: Color.fromARGB(255, 21, 111, 78),
         appBar: AppBar(
           title: const Text("My Card - basic portfolio"),
           centerTitle: true,
@@ -46,12 +46,29 @@ class MyHomePage extends StatelessWidget {
         ),
         body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircleAvatar(
                 radius: 50,
-                backgroundImage: AssetImage(
-                  "images/pq.jfif"
+                backgroundImage: AssetImage("images/pq.jfif"),
+              ),
+              Text(
+                "My Name",
+                style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
                 ),
+              ),
+              Text("JobTitle", style: TextStyle(fontFamily: 'Arial')),
+              SizedBox(
+                height: 20,
+              ),
+              Card(
+                child: ListTile(title: Text("Card 1")),
+              ),
+              Card(
+                child: ListTile(title: Text("Card 2")),
               )
             ],
           ),
@@ -59,7 +76,7 @@ class MyHomePage extends StatelessWidget {
       ),
     );
     // return SafeArea(
-      
+
     //   child: Column(
     //     children: <Widget>[
     //       Expanded(child: Text("Phu Quy")),
