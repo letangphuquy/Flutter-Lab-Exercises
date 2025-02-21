@@ -14,12 +14,24 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
-  int number = 0; // Trying to change state in a StatelessWidget
+  int leftDice = 0; // Trying to change state in a StatelessWidget
+  int rightDice = 0;
 
-  void rollDice() {
+  void rollLeftDice() {
     setState(() {
-      number = Random().nextInt(6) % 6 + 1;
+      leftDice = Random().nextInt(6) % 6 + 1;
     });
+  }
+
+  void rollRightDice() {
+    setState(() {
+      rightDice = Random().nextInt(6) % 6 + 1;
+    });
+  }
+
+  void rollTwoDices() {
+    rollLeftDice();
+    rollRightDice();
   }
 
   @override
@@ -34,31 +46,37 @@ class _MyApp extends State<MyApp> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Expanded(
-                  // child:
-                  TextButton(
-                      onPressed: rollDice,
-                      style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                10)), // ✅ Makes button fit square image
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(4),
-                        child: Image.asset(
-                          "images/dice$number.png",
-                          width: 100,
-                          height: 100,
-                        ),
-                      )),
-                  // ),
+                  Expanded(
+                    child: TextButton(
+                        onPressed: rollLeftDice,
+                        child: Padding(
+                          padding: EdgeInsets.all(4),
+                          child: Image.asset(
+                            "images/dice$leftDice.png",
+                            width: 100,
+                            height: 100,
+                          ),
+                        )),
+                  ),
+                  Expanded(
+                    child: TextButton(
+                        onPressed: rollRightDice,
+                        child: Padding(
+                          padding: EdgeInsets.all(4),
+                          child: Image.asset(
+                            "images/dice$rightDice.png",
+                            width: 100,
+                            height: 100,
+                          ),
+                        )),
+                  ),
                 ],
               ),
               SizedBox(
                 height: 40,
               ),
               ElevatedButton(
-                  onPressed: rollDice,
+                  onPressed: rollTwoDices,
                   child: Text(
                     "Roll dice!",
                     style: TextStyle(fontSize: 24),
