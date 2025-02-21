@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +14,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
-  int counter = 0; // Trying to change state in a StatelessWidget
+  int number = 0; // Trying to change state in a StatelessWidget
+
+  void rollDice() {
+      setState(() {
+          number = Random().nextInt(6) % 6 + 1;
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +31,10 @@ class _MyApp extends State<MyApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Hello World. Number should go in here"),
+              Text("$number"),
               ElevatedButton(
-                onPressed: () {},
-                child: Text("Roll dice"),
+                onPressed: () { rollDice(); },
+                child: Text("Roll"),
               ),
             ],
           ),
