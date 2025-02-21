@@ -5,31 +5,28 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-
+  const MyApp({super.key});
+  
   @override
-  State<StatefulWidget> createState() => _MyState();
+  State<StatefulWidget> createState() => _MyApp();
 }
 
-class _MyState extends State<MyApp> {
+class _MyApp extends State<MyApp> {
   int counter = 0; // Trying to change state in a StatelessWidget
-  @override
 
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text("Stateless Counter")),
+        appBar: AppBar(title: Text("Dicey")),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Counter: $counter", style: TextStyle(fontSize: 24)),
+              Text("Hello World. Number should go in here"),
               ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    counter += 1;
-                  });
-                },
-                child: Text("Increment"),
+                onPressed: () {},
+                child: Text("Roll dice"),
               ),
             ],
           ),
