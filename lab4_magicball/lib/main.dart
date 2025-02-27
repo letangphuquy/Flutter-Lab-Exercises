@@ -23,12 +23,20 @@ class MagicBallPage extends StatefulWidget {
 }
 
 class _MagicBallPageState extends State<MagicBallPage> {
-  int number = 0;
+  int number = 1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text("Magic 8 Ball"),),
+        backgroundColor: Colors.blue[300],
+        body: Center(
+          child: Column(
+            children: [
+              Image(image: AssetImage("images/ball$number.png"))
+            ],
+          ),
+        ),
 
     );
   }
