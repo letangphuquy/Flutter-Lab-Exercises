@@ -25,6 +25,12 @@ class MagicBallPage extends StatefulWidget {
 class _MagicBallPageState extends State<MagicBallPage> {
   int number = 1;
 
+  void shakeBall() {
+      setState(() {
+          number = Random().nextInt(5) + 1;
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,8 +38,13 @@ class _MagicBallPageState extends State<MagicBallPage> {
         backgroundColor: Colors.blue[300],
         body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image(image: AssetImage("images/ball$number.png"))
+              Expanded(
+                child: TextButton(
+                  onPressed: shakeBall,
+                  child: Image(image: AssetImage("images/ball$number.png"))),
+              )
             ],
           ),
         ),
