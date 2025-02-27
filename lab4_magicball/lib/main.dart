@@ -11,9 +11,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MagicBallPage(),
-    );
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+            appBar: AppBar(
+              title: Text("Magic 8 Ball"),
+            ),
+            backgroundColor: Colors.blue[300],
+            body: MagicBallPage()));
   }
 }
 
@@ -26,29 +30,24 @@ class _MagicBallPageState extends State<MagicBallPage> {
   int number = 1;
 
   void shakeBall() {
-      setState(() {
-          number = Random().nextInt(5) + 1;
-      });
+    setState(() {
+      number = Random().nextInt(5) + 1;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text("Magic 8 Ball"),),
-        backgroundColor: Colors.blue[300],
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: TextButton(
-                  onPressed: shakeBall,
-                  child: Image(image: AssetImage("images/ball$number.png"))),
-              )
-            ],
-          ),
-        ),
-
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: TextButton(
+                onPressed: shakeBall,
+                child: Image(image: AssetImage("images/ball$number.png"))),
+          )
+        ],
+      ),
     );
   }
 }
