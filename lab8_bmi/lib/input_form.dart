@@ -147,7 +147,7 @@ class _InputFormState extends State<InputForm> {
         ),
         ElevatedButton(
           onPressed: () {
-            widget.onCalculate(_height / 100, _weight); // Chuyển cm sang m
+            widget.onCalculate(_height, _weight); // Chuyển cm sang m
           },
           child: Text('Tính toán'),
         ),
