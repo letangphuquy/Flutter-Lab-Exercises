@@ -4,7 +4,7 @@ class Choice {
 
   Choice({
     required this.choiceText,
-    required this.nextIndex,  // Default to -1 to indicate no next choice.
+    required this.nextIndex,
   });
 }
 
