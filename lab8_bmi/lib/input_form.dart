@@ -11,48 +11,60 @@ class InputForm extends StatefulWidget {
 
 class _InputFormState extends State<InputForm> {
   double _age = 30;
-  double _weight = 78.0;
-  double _height = 175.0;
+  double _weight = 70.0;
+  double _height = 170.0;
+  String _gender = 'Male';
 
   final TextEditingController _ageController = TextEditingController(text: '30');
-  final TextEditingController _weightController = TextEditingController(text: '78.0');
-  final TextEditingController _heightController = TextEditingController(text: '175.0');
+  final TextEditingController _weightController = TextEditingController(text: '70.0');
+  final TextEditingController _heightController = TextEditingController(text: '170.0');
 
   @override
   void initState() {
     super.initState();
     _ageController.addListener(() {
-      setState(() {
-        _age = double.tryParse(_ageController.text) ?? _age;
-      });
+      double value = double.tryParse(_ageController.text) ?? _age;
+      if (value >= 0 && value <= 120) {
+        setState(() {
+          _age = value;
+        });
+      }
     });
     _weightController.addListener(() {
-      setState(() {
-        _weight = double.tryParse(_weightController.text) ?? _weight;
-      });
+      double value = double.tryParse(_weightController.text) ?? _weight;
+      if (value >= 30 && value <= 150) {
+        setState(() {
+          _weight = value;
+        });
+      }
     });
     _heightController.addListener(() {
-      setState(() {
-        _height = double.tryParse(_heightController.text) ?? _height;
-      });
+      double value = double.tryParse(_heightController.text) ?? _height;
+      if (value >= 100 && value <= 220) {
+        setState(() {
+          _height = value;
+        });
+      }
     });
   }
 
   @override
-  @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Age Input
+        Text('Tuổi:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        SizedBox(height: 8),
         Row(
           children: [
-            Text('Age: '),
             IconButton(
-              icon: Icon(Icons.remove),
+              icon: Icon(Icons.remove, color: Colors.teal),
               onPressed: () {
                 setState(() {
-                  _age = (_age - 1).clamp(0, 100);
-                  _ageController.text = _age.toStringAsFixed(0);
+                  if (_age > 0) {
+                    _age--;
+                    _ageController.text = _age.toStringAsFixed(0);
+                  }
                 });
               },
             ),
@@ -60,15 +72,20 @@ class _InputFormState extends State<InputForm> {
               child: TextField(
                 controller: _ageController,
                 keyboardType: TextInputType.number,
-                // decoration: InputDecoration(labelText: 'Age'),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                ),
               ),
             ),
             IconButton(
-              icon: Icon(Icons.add),
+              icon: Icon(Icons.add, color: Colors.teal),
               onPressed: () {
                 setState(() {
-                  _age = (_age + 1).clamp(0, 100);
-                  _ageController.text = _age.toStringAsFixed(0);
+                  if (_age < 120) {
+                    _age++;
+                    _ageController.text = _age.toStringAsFixed(0);
+                  }
                 });
               },
             ),
@@ -76,9 +93,9 @@ class _InputFormState extends State<InputForm> {
               child: Slider(
                 value: _age,
                 min: 0,
-                max: 100,
-                divisions: 100,
-                label: _age.round().toString(),
+                max: 120,
+                divisions: 120,
+                activeColor: Colors.teal,
                 onChanged: (value) {
                   setState(() {
                     _age = value;
@@ -89,24 +106,29 @@ class _InputFormState extends State<InputForm> {
             ),
           ],
         ),
-        // Weight Input
+        SizedBox(height: 20),
+        Text('Cân nặng (kg):', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        SizedBox(height: 8),
         Row(
           children: [
-            Text('Weight (kg): '),
             Expanded(
               child: TextField(
                 controller: _weightController,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
-                // decoration: InputDecoration(labelText: 'Weight'),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                ),
               ),
             ),
+            SizedBox(width: 10),
             Expanded(
               child: Slider(
                 value: _weight,
-                min: 0,
-                max: 200,
-                divisions: 2000,
-                label: _weight.toStringAsFixed(1),
+                min: 30,
+                max: 150,
+                divisions: 1200,
+                activeColor: Colors.teal,
                 onChanged: (value) {
                   setState(() {
                     _weight = value;
@@ -117,24 +139,29 @@ class _InputFormState extends State<InputForm> {
             ),
           ],
         ),
-        // Height Input
+        SizedBox(height: 20),
+        Text('Chiều cao (cm):', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        SizedBox(height: 8),
         Row(
           children: [
-            Text('Height (cm): '),
             Expanded(
               child: TextField(
                 controller: _heightController,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
-                // decoration: InputDecoration(labelText: 'Height'),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                ),
               ),
             ),
+            SizedBox(width: 10),
             Expanded(
               child: Slider(
                 value: _height,
-                min: 0,
-                max: 250,
-                divisions: 2500,
-                label: _height.toStringAsFixed(1),
+                min: 100,
+                max: 220,
+                divisions: 1200,
+                activeColor: Colors.teal,
                 onChanged: (value) {
                   setState(() {
                     _height = value;
@@ -145,13 +172,52 @@ class _InputFormState extends State<InputForm> {
             ),
           ],
         ),
-        ElevatedButton(
-          onPressed: () {
-            widget.onCalculate(_height, _weight); // Chuyển cm sang m
+        SizedBox(height: 20),
+        Text('Giới tính:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        SizedBox(height: 8),
+        ToggleButtons(
+          borderRadius: BorderRadius.circular(8),
+          selectedColor: Colors.teal,
+          fillColor: Colors.teal[100],
+          isSelected: [_gender == 'Male', _gender == 'Female'],
+          onPressed: (index) {
+            setState(() {
+              _gender = index == 0 ? 'Male' : 'Female';
+            });
           },
-          child: Text('Tính toán'),
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Icon(Icons.male, size: 30),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Icon(Icons.female, size: 30),
+            ),
+          ],
+        ),
+        SizedBox(height: 30),
+        Center(
+          child: ElevatedButton(
+            onPressed: () {
+              double height = double.tryParse(_heightController.text) ?? 0;
+              double weight = double.tryParse(_weightController.text) ?? 0;
+              if (height >= 100 && height <= 220 && weight >= 30 && weight <= 150) {
+                widget.onCalculate(height, weight);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Vui lòng nhập giá trị hợp lệ')),
+                );
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            ),
+            child: Text('Tính toán', style: TextStyle(fontSize: 18)),
+          ),
         ),
       ],
     );
-  }  
+  }
 }
