@@ -22,6 +22,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MagicBallPage extends StatefulWidget {
+  const MagicBallPage({super.key});
+
   @override
   State<StatefulWidget> createState() => _MagicBallPageState();
 }
