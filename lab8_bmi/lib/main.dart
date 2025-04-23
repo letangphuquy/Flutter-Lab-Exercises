@@ -28,7 +28,7 @@ class BMICalculator extends StatefulWidget {
   const BMICalculator({super.key});
 
   @override
-  _BMICalculatorState createState() => _BMICalculatorState();
+  State<BMICalculator> createState() => _BMICalculatorState();
 }
 
 class _BMICalculatorState extends State<BMICalculator> {
@@ -37,8 +37,18 @@ class _BMICalculatorState extends State<BMICalculator> {
 
   void _calculateBMI(double height, double weight) {
     setState(() {
-      _bmi = 20;
-      _category = 'dummy';
+      setState(() {
+        _bmi = weight / (height * height); // Tính BMI: cân nặng / (chiều cao^2)
+        if (_bmi < 18.5) {
+          _category = 'Gầy';
+        } else if (_bmi < 25) {
+          _category = 'Bình thường';
+        } else if (_bmi < 30) {
+          _category = 'Thừa cân';
+        } else {
+          _category = 'Béo phì';
+        }
+      });
     });
   }
 

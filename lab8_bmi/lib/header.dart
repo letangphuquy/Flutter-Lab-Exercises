@@ -6,7 +6,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'IMDOO - Tính BMI Của Bạn',
+      'Your BMI Calculator',
       style: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
