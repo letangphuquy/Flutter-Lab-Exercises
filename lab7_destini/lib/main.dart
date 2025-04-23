@@ -46,18 +46,25 @@ class _StoryPageState extends State<StoryPage> {
             ),
             // Choices buttons
             if (story.choices.isNotEmpty)
-              ...story.choices.map(
-                (choice) => _ChoiceButton(
-                  text: choice.choiceText,
-                  color: Colors.green,
-                  onTap: () => _next(choice),
-                ),
-              ).toList(),
+              ...story.choices
+                  .map(
+                    (choice) => _ChoiceButton(
+                      text: choice.choiceText,
+                      color: Colors.green,
+                      onTap: () => _next(choice),
+                    ),
+                  ),
+            TextButton(
+              onPressed: () => setState(() => brain.undo()),
+              child:
+                  const Text('Quay lại', style: TextStyle(color: Colors.white)),
+            ),
             // Restart button if the story ends
             if (brain.isEnd)
               TextButton(
                 onPressed: () => setState(brain.restart),
-                child: const Text('Restart', style: TextStyle(color: Colors.white)),
+                child: const Text('Restart',
+                    style: TextStyle(color: Colors.white)),
               ),
           ],
         ),
@@ -83,17 +90,17 @@ class _ChoiceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(vertical: 8.0),
-    child: SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: onTap,
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.all(16),
-          backgroundColor: color,
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: onTap,
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.all(16),
+              backgroundColor: color,
+            ),
+            child: Text(text, style: const TextStyle(fontSize: 18)),
+          ),
         ),
-        child: Text(text, style: const TextStyle(fontSize: 18)),
-      ),
-    ),
-  );
+      );
 }

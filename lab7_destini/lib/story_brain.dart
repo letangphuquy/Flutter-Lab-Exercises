@@ -2,8 +2,8 @@ import 'package:lab7_destini/story.dart';
 
 class StoryBrain {
   static const int notChooseIndex = -1; // Chỉ mục không hợp lệ
-
   int _currentIndex = 0;
+  final List<int> _history = [];  // Stack lưu lại các chỉ mục đã chọn
 
   final List<Story> _stories = [
     Story(
@@ -150,6 +150,7 @@ class StoryBrain {
     final nextIndex = currentStory.choices[choiceNumber].nextIndex;
 
     if (nextIndex != notChooseIndex && nextIndex < _stories.length) {
+      _history.add(_currentIndex);
       _currentIndex = nextIndex;
     } else {
       print("End of story or no valid next choice.");
@@ -157,7 +158,30 @@ class StoryBrain {
     }
   }
 
+  void undo() {
+    if (_history.isNotEmpty) {
+      _currentIndex = _history.removeLast();  // Quay lại trạng thái trước đó
+    }
+  }
+
   void restart() {
     _currentIndex = 0;
   }
 }
+/*
+thiết kế lại dữ liệu cốt truyện để đảm bảo chính xác. hãy in ra các story, index của chúng, các choices dẫn tới các story tiếp theo. 
+Yêu cầu:
+- Bắt đầu tại Story 0
+- Mọi story đều có thể tới được từ story 0
+- không có nextIndex nào >= stories.length
+- Cốt truyện hợp lý, khép kín.
+
+Thiết kế chính xác 16 story không hơn không kém trong đó có 2 ending story.. 
+
+Hãy kiểm tra thật kĩ bằng cách tự đọc lại code và in ra dưới dạng plaintext 
+- Story 0: choice 1: story 2. choice 2: story 3 ...
+- Story 1: ...
+- ...
+- Story 14: Ending
+- Story 15: Ending (no choice)
+*/
