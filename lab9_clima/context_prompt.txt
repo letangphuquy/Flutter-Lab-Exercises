@@ -1,2 +1,303 @@
+thêm bước 1 Skeleton UI. Nếu có điều chỉnh ở các bước sau, output ra file đã modify. Nhắc lại, hiện tại dự án của tôi chỉ có như sau: 
 Project structure:
 ./
+├── .dart_tool/
+├── .env
+├── .flutter-plugins
+├── .flutter-plugins-dependencies
+├── .gitignore
+├── .idea/
+├── .metadata
+├── README.md
+├── analysis_options.yaml
+├── android/
+├── build/
+├── context_prompt.txt
+├── fonts/
+├── images/
+├── ios/
+├── lab9_clima.iml
+├── lib/
+├── linux/
+├── list_dart_code.py
+├── macos/
+├── pubspec.lock
+├── pubspec.yaml
+├── test/
+├── web/
+└── windows/
+
+lib/
+    ├── main.dart
+    ├── screens
+        ├── city_screen.dart
+        ├── loading_screen.dart
+        └── location_screen.dart
+    ├── services
+        ├── api_key.dart
+        ├── location.dart
+        ├── networking.dart
+        └── weather.dart
+    └── utilities
+        └── constants.dart
+
+images/
+    ├── city_background.jpg
+    └── location_background.jpg
+
+fonts/
+    └── SpartanMB-Black.otf
+
+Files:
+=== File: lib\main.dart ===
+import 'package:flutter/material.dart';
+import 'package:clima/screens/loading_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+Future<void> main() async {
+  await dotenv.load(fileName: ".env");
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData.dark(),
+      home: LoadingScreen(),
+    );
+  }
+}
+
+=== End of file ===
+=== File: lib\screens\city_screen.dart ===
+import 'package:flutter/material.dart';
+import 'package:clima/utilities/constants.dart';
+
+class CityScreen extends StatefulWidget {
+  @override
+  _CityScreenState createState() => _CityScreenState();
+}
+
+class _CityScreenState extends State<CityScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/city_background.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        constraints: BoxConstraints.expand(),
+        child: SafeArea(
+          child: Column(
+            children: <Widget>[
+              Align(
+                alignment: Alignment.topLeft,
+                child: TextButton(
+                  onPressed: () {},
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    size: 50.0,
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(20.0),
+                child: null,
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Get Weather',
+                  style: kButtonTextStyle,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+=== End of file ===
+=== File: lib\screens\loading_screen.dart ===
+import 'package:flutter/material.dart';
+
+class LoadingScreen extends StatefulWidget {
+  @override
+  _LoadingScreenState createState() => _LoadingScreenState();
+}
+
+class _LoadingScreenState extends State<LoadingScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            //Get the current location
+          },
+          child: Text('Get Location'),
+        ),
+      ),
+    );
+  }
+}
+
+=== End of file ===
+=== File: lib\screens\location_screen.dart ===
+import 'package:flutter/material.dart';
+import 'package:clima/utilities/constants.dart';
+
+class LocationScreen extends StatefulWidget {
+  @override
+  _LocationScreenState createState() => _LocationScreenState();
+}
+
+class _LocationScreenState extends State<LocationScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/location_background.jpg'),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+                Colors.white.withOpacity(0.8), BlendMode.dstATop),
+          ),
+        ),
+        constraints: BoxConstraints.expand(),
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  TextButton(
+                    onPressed: () {},
+                    child: Icon(
+                      Icons.near_me,
+                      size: 50.0,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Icon(
+                      Icons.location_city,
+                      size: 50.0,
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 15.0),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      '32°',
+                      style: kTempTextStyle,
+                    ),
+                    Text(
+                      '☀️',
+                      style: kConditionTextStyle,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 15.0),
+                child: Text(
+                  "It's 🍦 time in San Francisco!",
+                  textAlign: TextAlign.right,
+                  style: kMessageTextStyle,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+=== End of file ===
+=== File: lib\services\api_key.dart ===
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+String apiKey = dotenv.env['VAR_NAME'] ?? 'default_api_key';
+
+
+=== End of file ===
+=== File: lib\services\location.dart ===
+
+=== End of file ===
+=== File: lib\services\networking.dart ===
+
+=== End of file ===
+=== File: lib\services\weather.dart ===
+class WeatherModel {
+  String getWeatherIcon(int condition) {
+    if (condition < 300) {
+      return '🌩';
+    } else if (condition < 400) {
+      return '🌧';
+    } else if (condition < 600) {
+      return '☔️';
+    } else if (condition < 700) {
+      return '☃️';
+    } else if (condition < 800) {
+      return '🌫';
+    } else if (condition == 800) {
+      return '☀️';
+    } else if (condition <= 804) {
+      return '☁️';
+    } else {
+      return '🤷‍';
+    }
+  }
+
+  String getMessage(int temp) {
+    if (temp > 25) {
+      return 'It\'s 🍦 time';
+    } else if (temp > 20) {
+      return 'Time for shorts and 👕';
+    } else if (temp < 10) {
+      return 'You\'ll need 🧣 and 🧤';
+    } else {
+      return 'Bring a 🧥 just in case';
+    }
+  }
+}
+
+=== End of file ===
+=== File: lib\utilities\constants.dart ===
+import 'package:flutter/material.dart';
+
+const kTempTextStyle = TextStyle(
+  fontFamily: 'Spartan MB',
+  fontSize: 100.0,
+);
+
+const kMessageTextStyle = TextStyle(
+  fontFamily: 'Spartan MB',
+  fontSize: 60.0,
+);
+
+const kButtonTextStyle = TextStyle(
+  fontSize: 30.0,
+  fontFamily: 'Spartan MB',
+);
+
+const kConditionTextStyle = TextStyle(
+  fontSize: 100.0,
+);
+
+=== End of file ===

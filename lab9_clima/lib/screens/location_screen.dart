@@ -1,3 +1,4 @@
+import 'package:clima/screens/city_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
 import 'package:clima/services/weather.dart';
@@ -42,6 +43,22 @@ class _LocationScreenState extends State<LocationScreen> {
     });
   }
 
+  void getLocationData() async {
+    var weatherData = await weatherModel.getLocationWeather();
+    updateUI(weatherData);
+  }
+
+  void getCityWeather() async {
+    var result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CityScreen()),
+    );
+    if (result != null) {
+      var weatherData = await weatherModel.getCityWeather(result);
+      updateUI(weatherData);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +86,9 @@ class _LocationScreenState extends State<LocationScreen> {
                     child: Icon(Icons.near_me, size: 50.0),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      getCityWeather();
+                    },
                     child: Icon(Icons.location_city, size: 50.0),
                   ),
                 ],
@@ -104,10 +123,5 @@ class _LocationScreenState extends State<LocationScreen> {
         ),
       ),
     );
-  }
-
-  void getLocationData() async {
-    var weatherData = await weatherModel.getLocationWeather();
-    updateUI(weatherData);
   }
 }
