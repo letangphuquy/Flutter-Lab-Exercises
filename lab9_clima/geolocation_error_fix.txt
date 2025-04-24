@@ -1,0 +1,5 @@
+Hướng dẫn khắc phục lỗi không bắt được vị trí:
+- Mở Extended Controls > Chọn Location > Tìm trên maps địa điểm bất kỳ xong nhấn Set Location.
+- REBOOT lại thiết bị: Thay đổi file cấu hình config.ini `ANDROID_USER\HOME\avd\test_device.avd`
+- Khởi động lại thiết bị, sau đó vào ứng dụng Google Maps để chắc chắn đã lấy được location mới
+- Chạy flutter run ứng dụng này!

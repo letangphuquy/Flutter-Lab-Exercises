@@ -3,6 +3,10 @@ import 'package:clima/utilities/constants.dart';
 import 'package:clima/services/weather.dart';
 
 class LocationScreen extends StatefulWidget {
+  final dynamic locationWeather;
+
+  LocationScreen({this.locationWeather});
+
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
@@ -17,11 +21,10 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   void initState() {
     super.initState();
-    getWeatherData();
+    updateUI(widget.locationWeather);
   }
 
-  void getWeatherData() async {
-    var weatherData = await weatherModel.getCityWeather('Jakarta'); // Test với London
+  void updateUI(dynamic weatherData) {
     setState(() {
       if (weatherData == null) {
         temperature = 0;
@@ -60,7 +63,9 @@ class _LocationScreenState extends State<LocationScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      getLocationData();
+                    },
                     child: Icon(Icons.near_me, size: 50.0),
                   ),
                   TextButton(
@@ -99,5 +104,10 @@ class _LocationScreenState extends State<LocationScreen> {
         ),
       ),
     );
+  }
+
+  void getLocationData() async {
+    var weatherData = await weatherModel.getLocationWeather();
+    updateUI(weatherData);
   }
 }
