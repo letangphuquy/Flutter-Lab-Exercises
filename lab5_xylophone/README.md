@@ -1,16 +1,17 @@
-# lab5_xylophone
+# Xylophone
 
-A new Flutter project.
+A musical instrument app built with Flutter.
 
-## Getting Started
+## Features
+- Seven different musical notes
+- Color-coded sound buttons
+- Real-time audio playback
 
-This project is a starting point for a Flutter application.
+## Technical Details
+- Audio player package integration
+- Custom sound asset management
+- Multi-touch support
+- Color-coded UI elements
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Dependencies
+- audioplayers package

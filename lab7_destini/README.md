@@ -1,16 +1,15 @@
-# lab7_destini
+# Destini
 
-A new Flutter project.
+An interactive story-based adventure game.
 
-## Getting Started
+## Features
+- Multiple story paths
+- Dynamic story progression
+- Choice-based narrative
+- Story branching logic
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Technical Details
+- Story tree implementation
+- State management for story progress
+- Custom button styling
+- Story data structure

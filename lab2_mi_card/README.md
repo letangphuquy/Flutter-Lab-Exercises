@@ -1,16 +1,14 @@
-# lab2_mi_card
+# MiCard
 
-A new Flutter project.
+A digital business card Flutter application showing personal profile information.
 
-## Getting Started
+## Features
+- Profile picture display
+- Contact information
+- Social media links
+- Custom fonts
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Implementation
+- Uses Column and Row widgets
+- CircleAvatar for profile picture
+- Custom styling with Cards

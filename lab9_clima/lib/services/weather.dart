@@ -5,8 +5,10 @@ import 'package:clima/services/api_key.dart';
 const openWeatherMapURL = 'https://api.openweathermap.org/data/2.5/weather';
 class WeatherModel {
   Future<dynamic> getCityWeather(String cityName) async {
-    String url = '$openWeatherMapURL?q=$cityName&appid=$apiKey&units=metric';
-    print('URL $url');
+    String encodedCityName = Uri.encodeComponent(cityName); // Mã hóa tên thành phố
+    // Dấu cách sẽ là %20
+    String url = '$openWeatherMapURL?q=$encodedCityName&appid=$apiKey&units=metric';
+    print('City $url');
     NetworkHelper networkHelper = NetworkHelper(url);
     var weatherData = await networkHelper.getData();
     return weatherData;
@@ -14,15 +16,13 @@ class WeatherModel {
 
   Future<dynamic> getLocationWeather() async {
     Location location = Location();
-    print('AWAITING LOCATION');
     await location.getCurrentLocation();
-    // return getCityWeather('London');
     print(location);
     if (location.latitude == null || location.longitude == null) {
       return null;
     }
     String url = '$openWeatherMapURL?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey&units=metric';
-    print('url : $url');
+    print('HERE : $url');
     NetworkHelper networkHelper = NetworkHelper(url);
     var weatherData = await networkHelper.getData();
     return weatherData;
